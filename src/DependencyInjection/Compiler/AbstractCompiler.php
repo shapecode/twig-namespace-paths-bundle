@@ -52,9 +52,7 @@ abstract class AbstractCompiler
             }
             $container->addResource(new FileExistenceResource($dir));
 
-            if (is_dir($dir = $bundle['path'] . '/Resources/templates')) {
-                $bundleHierarchy[$name]['template_dir'] = $dir;
-            }
+            $bundleHierarchy[$name]['template_dir'] = $bundle['path'] . '/Resources/templates';
         }
 
         return $bundleHierarchy;

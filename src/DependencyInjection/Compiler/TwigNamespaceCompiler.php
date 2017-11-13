@@ -42,15 +42,13 @@ class TwigNamespaceCompiler extends AbstractCompiler implements CompilerPassInte
                 }
             }
 
-            if (isset($bundle['template_dir'])) {
-                foreach ($bundleHierarchy as $sName => $sBundle) {
-                    $sNamespace = $this->normalizeBundleName($sName);
+            foreach ($bundleHierarchy as $sName => $sBundle) {
+                $sNamespace = $this->normalizeBundleName($sName);
 
-                    $dir = $bundle['template_dir'] . '/' . $sNamespace;
+                $dir = $bundle['template_dir'] . '/' . $sNamespace;
 
-                    if (is_dir($dir)) {
-                        $twigFilesystemLoaderDefinition->addMethodCall('addPath', [$dir, $sNamespace]);
-                    }
+                if (is_dir($dir)) {
+                    $twigFilesystemLoaderDefinition->addMethodCall('addPath', [$dir, $sNamespace]);
                 }
             }
         }
