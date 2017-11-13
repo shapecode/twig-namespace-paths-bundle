@@ -1,0 +1,1 @@
+twig-namespace-paths-bundle
