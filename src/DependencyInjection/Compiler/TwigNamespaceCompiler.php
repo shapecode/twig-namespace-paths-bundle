@@ -45,7 +45,7 @@ class TwigNamespaceCompiler extends AbstractCompiler implements CompilerPassInte
             foreach ($bundleHierarchy as $sName => $sBundle) {
                 $sNamespace = $this->normalizeBundleName($sName);
 
-                $dir = $bundle['template_dir'] . '/' . $sNamespace;
+                $dir = $bundle['template_dir'] . '/' . $sName;
 
                 if (is_dir($dir)) {
                     $twigFilesystemLoaderDefinition->addMethodCall('addPath', [$dir, $sNamespace]);
