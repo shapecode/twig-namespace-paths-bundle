@@ -48,7 +48,7 @@ class TwigNamespaceCompiler extends AbstractCompiler implements CompilerPassInte
                 $dir = $bundle['template_dir'] . '/' . $sName;
 
                 if (is_dir($dir)) {
-                    $twigFilesystemLoaderDefinition->addMethodCall('addPath', [$dir, $sNamespace]);
+                    $twigFilesystemLoaderDefinition->addMethodCall('prependPath', [$dir, $sNamespace]);
                 }
             }
         }
