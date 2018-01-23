@@ -25,6 +25,6 @@ class ShapecodeTwigNamespacePathsBundle extends Bundle
         parent::build($container);
 
         $container->addCompilerPass(new TwigNamespaceCompiler());
-        $container->addCompilerPass(new LiipFilesystemLoaderCompiler(), PassConfig::TYPE_OPTIMIZE);
+        $container->addCompilerPass(new LiipFilesystemLoaderCompiler());
     }
 }

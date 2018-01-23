@@ -3,7 +3,7 @@
 namespace Shapecode\Bundle\TwigNamespacePathsBundle\Liip;
 
 use Liip\ThemeBundle\ActiveTheme;
-use Symfony\Bundle\TwigBundle\Loader\FilesystemLoader as BaseFilesystemLoader;
+use Liip\ThemeBundle\Twig\Loader\FilesystemLoader as BaseFilesystemLoader;
 use Symfony\Component\Templating\TemplateReferenceInterface;
 
 /**
@@ -57,7 +57,36 @@ class FilesystemLoader extends BaseFilesystemLoader
             return $this->cache[$logicalName];
         }
 
-        $file = parent::findTemplate($template);
+        $file = null;
+        $previous = null;
+
+        $templateReference = $this->parser->parse($template);
+
+        try {
+            $file = $this->locator->locate($templateReference);
+        } catch (\Exception $e) {
+            $previous = $e;
+
+            // for BC
+            try {
+
+                $fileName = str_replace('views/', '', $templateReference->getPath());
+                $fileName = str_replace('Bundle/Resources/', '/', $fileName);
+                $fileName = str_replace('Resources/', '', $fileName);
+
+                $file = parent::findTemplate($fileName);
+            } catch (\Twig_Error_Loader $e) {
+                $previous = $e;
+            }
+        }
+
+        if (false === $file || null === $file) {
+            if ($throw) {
+                throw new \Twig_Error_Loader(sprintf('Unable to find template "%s".', $logicalName), -1, null, $previous);
+            }
+
+            return false;
+        }
 
         return $this->cache[$logicalName] = $file;
     }
