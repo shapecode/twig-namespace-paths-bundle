@@ -1,15 +1,14 @@
 <?php
 
-namespace Shapecode\Bundle\TwigNamespacePathsBundle\Liip;
+namespace Shapecode\Bundle\TwigNamespacePathsBundle\Twig\Loader;
 
-use Liip\ThemeBundle\Twig\Loader\FilesystemLoader as BaseFilesystemLoader;
+use Symfony\Bundle\TwigBundle\Loader\FilesystemLoader as BaseFilesystemLoader;
 
 /**
  * Class FilesystemLoader
  *
- * @package Shapecode\Bundle\TwigNamespacePathsBundle\Liip
+ * @package Shapecode\Bundle\TwigNamespacePathsBundle\Twig\Loader
  * @author  Nikita Loges
- * @company tenolo GbR
  */
 class FilesystemLoader extends BaseFilesystemLoader
 {
@@ -20,10 +19,6 @@ class FilesystemLoader extends BaseFilesystemLoader
     protected function findTemplate($template, $throw = true)
     {
         $logicalName = (string)$template;
-
-        if ($this->activeTheme) {
-            $logicalName .= '|' . $this->activeTheme->getName();
-        }
 
         if (isset($this->cache[$logicalName])) {
             return $this->cache[$logicalName];

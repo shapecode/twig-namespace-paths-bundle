@@ -2,7 +2,7 @@
 
 namespace Shapecode\Bundle\TwigNamespacePathsBundle\DependencyInjection\Compiler;
 
-use Shapecode\Bundle\TwigNamespacePathsBundle\Liip\FilesystemLoader;
+use Shapecode\Bundle\TwigNamespacePathsBundle\Twig\Loader\FilesystemLoader;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
