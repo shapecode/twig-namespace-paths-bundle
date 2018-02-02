@@ -1,2 +1,11 @@
 services:
 
+    shapecode_twig_namespace.locator.chain_file_locator:
+        class: Shapecode\Bundle\TwigNamespacePathsBundle\Locator\ChainFileLocator
+
+    shapecode_twig_namespace.locator.templates_dir_file_locator:
+        class: Shapecode\Bundle\TwigNamespacePathsBundle\Locator\TemplatesDirectoryFileLocator
+        arguments:
+            - '@kernel'
+        tags:
+            - { name: shapecode.template_file_locator }

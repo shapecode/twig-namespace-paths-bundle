@@ -5,15 +5,16 @@ namespace Shapecode\Bundle\TwigNamespacePathsBundle\DependencyInjection\Compiler
 use Shapecode\Bundle\TwigNamespacePathsBundle\Liip\FilesystemLoader;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Class LiipFilesystemLoaderCompiler
+ * Class FilesystemLoaderCompiler
  *
  * @package Shapecode\Bundle\TwigNamespacePathsBundle\DependencyInjection\Compiler
  * @author  Nikita Loges
  * @company tenolo GbR
  */
-class LiipFilesystemLoaderCompiler implements CompilerPassInterface
+class FilesystemLoaderCompiler implements CompilerPassInterface
 {
 
     /**
@@ -21,14 +22,8 @@ class LiipFilesystemLoaderCompiler implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $liipClass = '\Liip\ThemeBundle\LiipThemeBundle';
-
-        if (!class_exists($liipClass)) {
-            return;
-        }
-
         $twigFilesystemLoaderDefinition = $container->getDefinition('twig.loader.filesystem');
         $twigFilesystemLoaderDefinition->setClass(FilesystemLoader::class);
-
+        $twigFilesystemLoaderDefinition->replaceArgument(0, new Reference('shapecode_twig_namespace.locator.chain_file_locator'));
     }
 }
