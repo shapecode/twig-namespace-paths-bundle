@@ -25,5 +25,10 @@ class FilesystemLoaderCompiler implements CompilerPassInterface
         $twigFilesystemLoaderDefinition = $container->getDefinition('twig.loader.filesystem');
         $twigFilesystemLoaderDefinition->setClass(FilesystemLoader::class);
         $twigFilesystemLoaderDefinition->replaceArgument(0, new Reference('shapecode_twig_namespace.locator.chain_file_locator'));
+
+        // liip fix
+        if ($twigFilesystemLoaderDefinition->hasMethodCall('setActiveTheme')) {
+            $twigFilesystemLoaderDefinition->removeMethodCall('setActiveTheme');
+        }
     }
 }
