@@ -30,5 +30,7 @@ class FilesystemLoaderCompiler implements CompilerPassInterface
         if ($twigFilesystemLoaderDefinition->hasMethodCall('setActiveTheme')) {
             $twigFilesystemLoaderDefinition->removeMethodCall('setActiveTheme');
         }
+
+//        $container->setAlias('templating.locator', 'shapecode_twig_namespace.locator.templating_locator');
     }
 }
