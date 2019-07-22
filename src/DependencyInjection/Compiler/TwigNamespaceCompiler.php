@@ -12,7 +12,6 @@ use Symfony\Component\HttpKernel\Kernel;
  *
  * @package Shapecode\Bundle\TwigNamespacePathsBundle\DependencyInjection\Compiler
  * @author  Nikita Loges
- * @company tenolo GbR
  */
 class TwigNamespaceCompiler implements CompilerPassInterface
 {
